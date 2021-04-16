@@ -9,6 +9,7 @@
 #include<stdlib.h> 
 #include<math.h>
 #include<vector>
+#include<iostream>
 #include<SDL.h> 
 
 SDL_Window* window = NULL;
@@ -59,7 +60,7 @@ void bezierCurve(int x[], int y[])
 	std::vector<std::pair<int, int>> centerPoints;
 	double xu = 0.0, yu = 0.0, u = 0.0;
 	int i = 0;
-	for (u = 0.0; u <= 1.0; u += 0.01)
+	for (u = 0.0; u <= 1.0; u += 0.0001)
 	{
 		xu = pow(1 - u, 3) * x[0] + 3 * u * pow(1 - u, 2) * x[1] + 3 * pow(u, 2) * (1 - u) * x[2]
 			+ pow(u, 3) * x[3];
@@ -67,25 +68,26 @@ void bezierCurve(int x[], int y[])
 			+ pow(u, 3) * y[3];
 		centerPoints.push_back(std::pair<int, int>((int)xu, (int)yu));
 	}
+	std::cout << centerPoints.size() << std::endl;
 	for (size_t i = 1; i < centerPoints.size(); i++)
 	{
-		int x1 = centerPoints[i-1].first;
-		int y1 = centerPoints[i-1].second;
+		int x1 = centerPoints[i - 1].first;
+		int y1 = centerPoints[i - 1].second;
 		int x2 = centerPoints[i].first;
 		int y2 = centerPoints[i].second;
 
 		SDL_SetRenderDrawColor(renderer, 255, 255, 255, SDL_ALPHA_OPAQUE);
 		SDL_RenderDrawPoint(renderer, x2, y2);
 
-		SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-		int xnorm = (x2 - x1);
-		int ynorm = -1 * (y2 - y1);
-		SDL_RenderDrawPoint(renderer, x2 + (xnorm + 20), y2 + (ynorm+20));
+		float shift = 20.0f;
+		float xnorm = -1 * (y2 - y1);
+		float ynorm = (x2 - x1);
+		float l = sqrt(xnorm * xnorm + ynorm * ynorm);
+		float x = x2 + ((xnorm / l) * shift);
+		float y = y2 + ((ynorm / l) * shift);
 
-		SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
-		xnorm = -1 * (x2 - x1);
-		ynorm = (y2 - y1);
-		SDL_RenderDrawPoint(renderer, x2 + (xnorm - 20), y2 + (ynorm - 20));
+		SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
+		SDL_RenderDrawPoint(renderer, x, y);
 	}
 }
 int main(int argc, char* argv[])
@@ -126,25 +128,6 @@ int main(int argc, char* argv[])
 				if (i == 4)
 				{
 					bezierCurve(x, y);
-
-					/*int x1[4], y1[4];
-					for (size_t i = 0; i < 4; i++)
-					{
-						x1[i] = x[i]+20;
-						y1[i] = y[i];
-					}
-					SDL_SetRenderDrawColor(renderer, 255, 0, 0, SDL_ALPHA_OPAQUE);
-					bezierCurve(x1, y1);
-
-					int x2[4], y2[4];
-					for (size_t i = 0; i < 4; i++)
-					{
-						x2[i] = x[i] - 20;
-						y2[i] = y[i];
-					}
-					SDL_SetRenderDrawColor(renderer, 0, 255, 0, SDL_ALPHA_OPAQUE);
-					bezierCurve(x2, y2);*/
-
 					flagDrawn = 1;
 				}
 
