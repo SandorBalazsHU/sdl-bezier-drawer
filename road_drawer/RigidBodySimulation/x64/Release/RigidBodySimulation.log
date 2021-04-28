@@ -1,0 +1,13 @@
+﻿  Camera.cpp
+  Simulation.cpp
+C:\Users\sabua\Desktop\DEV\road\RigidBodySimulation\Simulation.cpp(151,14): warning C4244: 'initializing': conversion from 'GLint' to 'float', possible loss of data
+C:\Users\sabua\Desktop\DEV\road\RigidBodySimulation\Simulation.cpp(152,15): warning C4244: 'initializing': conversion from 'GLint' to 'float', possible loss of data
+C:\Users\sabua\Desktop\DEV\road\RigidBodySimulation\Simulation.cpp(184,11): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\sabua\Desktop\DEV\road\RigidBodySimulation\Simulation.cpp(186,14): warning C4244: 'initializing': conversion from 'double' to 'float', possible loss of data
+C:\Users\sabua\Desktop\DEV\road\RigidBodySimulation\Simulation.cpp(191,48): warning C4267: '=': conversion from 'size_t' to 'int', possible loss of data
+  Generating code
+  38 of 2443 functions ( 1.6%) were compiled, the rest were copied from previous compilation.
+    0 functions were new in current compilation
+    55 functions had inline decision re-evaluated but remain unchanged
+  Finished generating code
+  RigidBodySimulation.vcxproj -> C:\Users\sabua\Desktop\DEV\road\x64\Release\RigidBodySimulation.exe
